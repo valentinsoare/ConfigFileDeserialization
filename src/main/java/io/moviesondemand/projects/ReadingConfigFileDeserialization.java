@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class ReadingConfigFileDeserialization {
+
     public static <T> Optional<T> createConfigObject(Class<T> clazz, Path filePath) {
 
         try {
@@ -73,9 +74,9 @@ public class ReadingConfigFileDeserialization {
         };
     }
 
-    public static <T> T concat(Class<?> type, Object... arguments) {
+    public static <T> Optional<T> concat(Class<?> type, Object... arguments) {
         if (arguments.length == 0) {
-            return null;
+            return Optional.empty();
         }
 
         List<Object> e = new ArrayList<>();
@@ -98,6 +99,6 @@ public class ReadingConfigFileDeserialization {
             Array.set(flattenedArray, i, e.get(i));
         }
 
-        return (T) flattenedArray;
+        return Optional.of((T) flattenedArray);
     }
 }
